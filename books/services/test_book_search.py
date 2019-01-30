@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from adapters.mock_book_repo import BookRepo
-from entities.author import Author
-from entities.book import Book
+from ..adapters.mock_book_repo import BookRepo
+from ..entities.author import Author
+from ..entities.book import Book
 from .book_search import BookSearchService
 
 

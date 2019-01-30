@@ -1,4 +1,4 @@
-from interfaces.book_repo import BookRepoInterface
+from ..interfaces.book_repo import BookRepoInterface
 
 
 class BookRepo(BookRepoInterface):

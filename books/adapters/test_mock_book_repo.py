@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from entities.author import Author
-from entities.book import Book
+from ..entities.author import Author
+from ..entities.book import Book
 from .mock_book_repo import BookRepo
 
 
