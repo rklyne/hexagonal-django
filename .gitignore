@@ -1,0 +1,20 @@
+# https://git-scm.com/docs/gitignore
+
+# IDE files
+# Based on https://github.com/github/gitignore/blob/master/Global/Vim.gitignore
+.*.sw[a-p]
+.idea/
+.vscode/*
+
+# Generated files
+*.py[cod]
+*.log
+*.mo
+*.pot
+
+# Misc
+.DS_Store
+
+# Coverage
+.coverage
+htmlcov/
