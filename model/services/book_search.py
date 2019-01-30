@@ -35,3 +35,6 @@ class BookSearchService(SearchService):
 
     def list_by_author(self, author):
         return self.book_repo.iter_by_author(author)
+
+    def all(self):
+        return self.book_repo.iter_all()

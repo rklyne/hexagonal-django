@@ -12,6 +12,7 @@ tags
 *.log
 *.mo
 *.pot
+db.sqlite3
 
 # Misc
 .DS_Store

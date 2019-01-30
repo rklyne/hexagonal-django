@@ -21,3 +21,7 @@ class BookRepo(BookRepoInterface):
         for book in self.books:
             if book.author == author:
                 yield book
+
+    def iter_all(self):
+        for book in self.books:
+            yield book

@@ -21,3 +21,6 @@ class BookRepoInterface(Interface):
 
     def count(self):
         raise NotImplementedError
+
+    def iter_all(self):
+        raise NotImplementedError
