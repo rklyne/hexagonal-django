@@ -23,5 +23,5 @@ class Index(TemplateView):
 
         repo = get_repo()
         service = BookSearchService(repo)
-        context['titles'] = [book.title for book in service.iter_books()]
+        context['titles'] = [book.title for book in service.all()]
         return context
