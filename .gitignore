@@ -5,6 +5,7 @@
 .*.sw[a-p]
 .idea/
 .vscode/*
+tags
 
 # Generated files
 *.py[cod]
