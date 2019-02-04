@@ -6,8 +6,18 @@ from django.views.generic.base import TemplateView
 
 from .app import app
 from .entities.author import Author
+from .entities.book import Book
 from .forms import BookSearchForm
-from services.book_search import BookSearchService
+
+
+def create_dummy_data():
+    repo = app._books
+    book = Book("asd", Author("asdf"))
+    book2 = Book("asd2", Author("asdf"))
+    author2_book = Book("asdf", Author("asdf2"))
+    repo.add_book(book)
+    repo.add_book(book2)
+    repo.add_book(author2_book)
 
 
 class Index(TemplateView):
@@ -23,6 +33,10 @@ class Index(TemplateView):
         return context
 
     def post(self, request):
+        if 'populate' in request.POST:
+            create_dummy_data()
+            messages.info(request, "dummy books created")
+            return self.get(request)
         form = BookSearchForm(request.POST)
         if not form.is_valid():
             return self.get(request)
@@ -35,4 +49,4 @@ class Index(TemplateView):
                 return self.get(request)
         else:
             books = app.book_search.list_by_author(Author(name=data['author']))
-        return self.render_to_response('list.html', {'books': books})
+        return self.render_to_response(request, 'list.html', {'books': books})
