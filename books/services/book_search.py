@@ -38,3 +38,6 @@ class BookSearchService(SearchService):
 
     def all(self):
         return self.book_repo.iter_all()
+
+    def get_count(self):
+        return self.book_repo.count()
