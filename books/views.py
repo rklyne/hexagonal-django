@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
+from django.shortcuts import render_to_response
 from django.views.generic.base import TemplateView
 
 from .app import app
@@ -41,12 +42,22 @@ class Index(TemplateView):
         if not form.is_valid():
             return self.get(request)
         data = form.cleaned_data
-        if 'title' in data:
+        if data['title']:
             try:
                 books = [app.book_search.get_by_title(data['title'])]
             except app.book_search.NoResults:
                 messages.warning(request, "book not found")
                 return self.get(request)
+        elif 'all' in request.POST:
+            books = app.book_search.all()
         else:
             books = app.book_search.list_by_author(Author(name=data['author']))
-        return self.render_to_response(request, 'list.html', {'books': books})
+        return render_list_view(request, books)
+
+
+def render_list_view(request, books):
+    return render_to_response('list.html', {'books': list(books)})
+
+
+class List(TemplateView):
+    template_name = 'list.html'

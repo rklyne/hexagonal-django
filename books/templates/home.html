@@ -7,6 +7,7 @@
             {% csrf_token %}
             {{ search_form.as_p }}
             <input type="submit" name="search" value="search"></input>
+            <input type="submit" name="all" value="all"></input>
             <input type="submit" name="populate" value="add dummy data"></input>
         </form>
 {% endblock %}

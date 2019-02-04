@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+Showing {{ books|length }} books.
+<table>
+    <tr><th>Title</th><th>Author</th></tr>
+    {% for book in books %}
+        <tr><td>{{book.title}}</td><td>{{book.author.name}}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
