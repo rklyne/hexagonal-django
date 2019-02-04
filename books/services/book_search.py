@@ -2,6 +2,9 @@ import attr
 
 
 class SearchService(object):
+    """
+    TODO: Move to own module
+    """
     class SearchException(Exception):
         pass
 
