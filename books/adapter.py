@@ -13,7 +13,7 @@ def _model_to_entity(book_model):
         assert model_author.id
         if model_author.id not in authors:
             authors[model_author.id] = Author(
-                name=model_author.title,
+                name=model_author.name or model_author.title,
                 website=model_author.website,
             )
         return authors[model_author.id]
@@ -25,13 +25,25 @@ def _model_to_entity(book_model):
     )
 
 
+def get_or_create_author_by_name(author):
+    author, _ = DjangoAuthor.objects.get_or_create(
+        title=author.name,
+        defaults={
+            'website': author.website,
+        }
+    )
+    author.name = author.title
+    author.save(update_fields=['name'])
+    return author
+
+
 class BookRepo(BookRepoInterface):
     def iter_by_title(self, title):
         queryset = DjangoBook.objects.filter(title=title)
         return imap(_model_to_entity, queryset.iterator())
 
     def iter_by_author(self, author):
-        queryset = DjangoBook.objects.filter(author__title=author.name)
+        queryset = DjangoBook.objects.filter(author__name=author.name)
         return imap(_model_to_entity, queryset.iterator())
 
     def iter_all(self):
@@ -42,12 +54,7 @@ class BookRepo(BookRepoInterface):
         return DjangoBook.objects.count()
 
     def add_book(self, book):
-        author, _ = DjangoAuthor.objects.get_or_create(
-            title=book.author.name,
-            defaults={
-                'website': book.author.website,
-            }
-        )
+        author = get_or_create_author_by_name(book.author)
         DjangoBook.objects.create(
             title=book.title,
             author=author,

@@ -6,6 +6,7 @@ from django.db import models
 
 class Author(models.Model):
     title = models.TextField()
+    name = models.TextField(null=True)
     website = models.TextField(blank=True, null=True)
 
 
