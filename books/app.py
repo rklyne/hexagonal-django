@@ -1,5 +1,5 @@
-from django_repo.adapter import BookRepo
-from model.services.book_search import BookSearchService
+from .adapter import BookRepo
+from .services.book_search import BookSearchService
 
 
 class Application(object):

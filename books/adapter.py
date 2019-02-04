@@ -1,9 +1,9 @@
 from itertools import imap
 
 from .models import Book as DjangoBook, Author as DjangoAuthor
-from model.entities.author import Author
-from model.entities.book import Book
-from model.interfaces.book_repo import BookRepoInterface
+from entities.author import Author
+from entities.book import Book
+from interfaces.book_repo import BookRepoInterface
 
 
 def _model_to_entity(book_model):

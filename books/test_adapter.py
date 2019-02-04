@@ -2,8 +2,8 @@ from __future__ import absolute_import, unicode_literals
 
 from django.test import TestCase
 
-from model.entities.author import Author
-from model.entities.book import Book
+from .entities.author import Author
+from .entities.book import Book
 from .adapter import BookRepo
 
 
