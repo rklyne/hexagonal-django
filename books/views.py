@@ -30,11 +30,11 @@ class Index(TemplateView):
 
         context['book_count'] = app.book_search.get_count()
         context['search_form'] = BookSearchForm()
-        context['titles'] = [book.title for book in app.book_search.all()]
         return context
 
     def post(self, request):
         if 'populate' in request.POST:
+            # Just to aid data creation in testing
             create_dummy_data()
             messages.info(request, "dummy books created")
             return self.get(request)
@@ -52,10 +52,10 @@ class Index(TemplateView):
             books = app.book_search.all()
         else:
             books = app.book_search.list_by_author(Author(name=data['author']))
-        return render_list_view(request, books)
+        return render_list_view(books)
 
 
-def render_list_view(request, books):
+def render_list_view(books):
     return render_to_response('list.html', {'books': list(books)})
 
 
