@@ -4,8 +4,8 @@ from ..entities.author import Author
 from ..entities.book import Book
 
 
-def contract_test(repo_generator):
-    class BookRepoInterfaceContract(TestCase):
+def contract_test(repo_generator, test_class=TestCase):
+    class BookRepoInterfaceContract(test_class):
         def test_create_repo(self):
             repo = repo_generator()
             self.assertTrue(repo)
