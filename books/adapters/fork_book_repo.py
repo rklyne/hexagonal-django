@@ -16,4 +16,13 @@ class ForkRepo(BookRepoInterface):
         # TODO: Could iterate both and assert equivalence?
         return self.main_repo.iter_by_title(title)
 
-    # TODO: ... Incomplete, but you get the idea
+    def count(self):
+        count = self.main_repo.count()
+        assert count == self.other_repo.count()
+        return count
+
+    def iter_by_author(self, author):
+        return self.main_repo.iter_by_author(author)
+
+    def iter_all(self):
+        return self.main_repo.iter_all()
