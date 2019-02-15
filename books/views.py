@@ -61,3 +61,12 @@ def render_list_view(books):
 
 class List(TemplateView):
     template_name = 'list.html'
+
+
+class BulkBookUploadView(object): pass
+
+class BookPublishView(object): pass
+
+class FlibbleTheBooksView(object): pass
+
+class ReticulateSpines(object): pass
