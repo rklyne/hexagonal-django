@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from ..entities.author import Author
 from ..entities.book import Book
-from ..adapter import BookRepo
+from ..adapters.django import BookRepo
 
 
 class TestMockBookRepo(TestCase):

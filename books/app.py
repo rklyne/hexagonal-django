@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from .adapter import BookRepo
+from .adapters.django import BookRepo
 from .adapters.mock_book_repo import BookRepo as MockBookRepo
 from .services.book_search import BookSearchService
 
