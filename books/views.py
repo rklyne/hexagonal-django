@@ -12,13 +12,13 @@ from .forms import BookSearchForm
 
 
 def create_dummy_data():
-    repo = app._books
+    service = app.book_creation
     book = Book("asd", Author("asdf"))
     book2 = Book("asd2", Author("asdf"))
     author2_book = Book("asdf", Author("asdf2"))
-    repo.add_book(book)
-    repo.add_book(book2)
-    repo.add_book(author2_book)
+    service.add_book(book)
+    service.add_book(book2)
+    service.add_book(author2_book)
 
 
 class Index(TemplateView):
