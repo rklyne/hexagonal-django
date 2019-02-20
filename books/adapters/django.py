@@ -1,4 +1,9 @@
-from itertools import imap
+try:
+    # Python 2.6
+    from itertools import imap
+except ImportError:
+    # Python 3+
+    imap = map
 
 from ..models import Book as DjangoBook, Author as DjangoAuthor
 from ..entities.author import Author

@@ -3,7 +3,6 @@ from ..interfaces.book_repo import BookRepoInterface
 
 class BookRepo(BookRepoInterface):
     def __init__(self):
-        self._assert_interface_complete()
         self.books = []
 
     def add_book(self, book):

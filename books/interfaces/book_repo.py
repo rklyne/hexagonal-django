@@ -1,11 +1,8 @@
-from .interface import Interface
-
-
 class BookRepoError(Exception):
     pass
 
 
-class BookRepoInterface(Interface):
+class BookRepoInterface(object):
     def add_book(self, book):
         """
         Adds a book to the repo.

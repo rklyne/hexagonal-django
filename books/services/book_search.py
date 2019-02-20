@@ -16,12 +16,12 @@ class SearchService(object):
 
     def _one_from_iterator(self, iterator):
         try:
-            return iterator.next()
+            return next(iterator)
         except StopIteration:
             raise self.NoResults
         finally:
             try:
-                iterator.next()
+                next(iterator)
             except StopIteration:
                 pass
             else:

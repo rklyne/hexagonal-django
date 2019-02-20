@@ -12,6 +12,7 @@ tox-pipenv = "*"
 [packages]
 attrs = "*"
 django = "~=1.11.18"
+six = "*"
 
 [requires]
 # python_version = "2.7"

@@ -38,7 +38,7 @@ class TestBookSearch(TestCase):
     def test_list_by_author(self):
         search_service = BookSearchService(self.repo)
         books = search_service.list_by_author(Author("author name"))
-        self.assertItemsEqual([self.book, self.book2], books)
+        self.assertEqual([self.book, self.book2], list(books))
 
     def test_count(self):
         search_service = BookSearchService(self.repo)
