@@ -20,3 +20,6 @@ db.sqlite3
 # Coverage
 .coverage
 htmlcov/
+
+# Test files
+.tox/
