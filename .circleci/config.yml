@@ -31,7 +31,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            sudo apt install python==2.7.11
+            sudo apt install python=2.7.11
             sudo pip install pipenv
             pipenv install --deploy --dev
 
