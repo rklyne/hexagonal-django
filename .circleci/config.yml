@@ -31,7 +31,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            sudo pip install pipenv
+            sudo pip install pipenv==2018.11.26
             pipenv install --deploy --dev
 
       - save_cache:
