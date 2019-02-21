@@ -1,5 +1,5 @@
 from .mock_crud import MockCrud
-from ..interfaces.crud_contract import test_contract
+from ..interfaces.crud_contract import contract_test
 
 
-MockCrudTest = test_contract(MockCrud)
+MockCrudTest = contract_test(MockCrud)

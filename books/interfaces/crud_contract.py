@@ -3,7 +3,7 @@ from unittest import TestCase
 from .crud import BasicDatum, CrudError
 
 
-def test_contract(crud_repo_generator, base_class=TestCase):
+def contract_test(crud_repo_generator, base_class=TestCase):
     class ContractTest(base_class):
         def test_create_one(self):
             instance = crud_repo_generator()
