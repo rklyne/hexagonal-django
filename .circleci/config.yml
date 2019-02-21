@@ -48,7 +48,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv run tox
+            pipenv run manage.py test
 
       - store_artifacts:
           path: test-reports
