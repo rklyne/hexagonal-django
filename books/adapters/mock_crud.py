@@ -1,3 +1,5 @@
+from uuid import uuid4 as new_id
+
 from ..interfaces.crud import CrudInterface, CrudError
 
 
@@ -6,9 +8,12 @@ class MockCrud(CrudInterface):
         self.store = {}
 
     def create(self, one):
+        if not one.id:
+            one.id = str(new_id())
         if one.id in self.store:
             raise CrudError("Already exists")
         self.store[one.id] = one
+        return one.id
 
     def update(self, one):
         if one.id not in self.store:

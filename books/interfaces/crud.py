@@ -1,11 +1,9 @@
-from itertools import count
-
 import attr
 
 
 @attr.s
 class BasicDatum(object):
-    id = attr.ib(factory=count().next)
+    id = attr.ib(default=None)
 
 
 class CrudError(Exception):

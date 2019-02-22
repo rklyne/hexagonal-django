@@ -10,6 +10,13 @@ def contract_test(crud_repo_generator, base_class=TestCase):
             instance.create(BasicDatum())
             self.assertEqual(1, instance.count())
 
+        def test_create_returns_id(self):
+            instance = crud_repo_generator()
+            thing = BasicDatum()
+            thing_id = instance.create(thing)
+            thing2 = instance.get(thing_id)
+            self.assertEqual(thing, thing2)
+
         def test_create_duplicate(self):
             instance = crud_repo_generator()
             thing = BasicDatum()
