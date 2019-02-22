@@ -2,6 +2,7 @@
 
 {% block content %}
     <h2>Libraries</h2>
+    <a href="{% url 'library-create' %}">Add library</a>
     <ul>
         {% for library in object_list %}
             <li>{{ library.name }}</li>
