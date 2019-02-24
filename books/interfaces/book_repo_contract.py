@@ -40,4 +40,12 @@ def contract_test(repo_generator, test_class=TestCase):
             repo.add_book(book2)
             self.assertEqual([book], list(repo.iter_by_author(book.author)))
 
+        def test_add_book_setting_id(self):
+            repo = repo_generator()
+            book = Book("asd", Author("asdf"))
+            the_id = repo.add_book(book)
+            self.assertTrue(the_id)
+            self.assertEqual(the_id, book.id)
+
+
     return BookRepoInterfaceContract

@@ -9,8 +9,10 @@ class ForkRepo(BookRepoInterface):
     other_repo = attr.ib()
 
     def add_book(self, book):
-        self.main_repo.add_book(book)
+        the_id = self.main_repo.add_book(book)
+        book.id = the_id
         self.other_repo.add_book(book)
+        return the_id
 
     def iter_by_title(self, title):
         # TODO: Could iterate both and assert equivalence?

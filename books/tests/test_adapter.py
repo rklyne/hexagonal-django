@@ -6,4 +6,5 @@ from ..adapters.django import BookRepo
 from ..interfaces.book_repo_contract import contract_test
 
 
-TestDjangoBookRepo = contract_test(BookRepo, test_class=TestCase)
+class TestDjangoBookRepo(contract_test(BookRepo, test_class=TestCase)):
+    pass

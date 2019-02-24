@@ -27,6 +27,7 @@ def _model_to_entity(book_model):
         author=get_author(book_model.author),
         published=book_model.published,
         isbn=book_model.isbn,
+        id=book_model.id,
     )
 
 
@@ -60,9 +61,12 @@ class BookRepo(BookRepoInterface):
 
     def add_book(self, book):
         author = get_or_create_author_by_name(book.author)
-        DjangoBook.objects.create(
+        django_book = DjangoBook.objects.create(
             title=book.title,
             author=author,
             isbn=book.isbn,
             published=book.published,
         )
+        the_id = django_book.pk
+        book.id = the_id
+        return the_id

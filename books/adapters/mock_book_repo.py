@@ -1,12 +1,17 @@
+from itertools import count
+
 from ..interfaces.book_repo import BookRepoInterface
 
 
 class BookRepo(BookRepoInterface):
     def __init__(self):
         self.books = []
+        self.next_id = count(1).next
 
     def add_book(self, book):
         self.books.append(book)
+        book.id = self.next_id()
+        return book.id
 
     def count(self):
         return len(self.books)
