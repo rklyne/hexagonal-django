@@ -3,9 +3,18 @@
 {% block content %}
     <h2>Libraries</h2>
     <a href="{% url 'library-create' %}">Add library</a>
-    <ul>
+    <table>
+        <tr>
+            <th>Library name</th>
+            <th>Book count</th>
+            <th>Loaned book count</th>
+        </tr>
         {% for library in object_list %}
-            <li>{{ library.name }}</li>
+        <tr>
+            <td>{{ library.name }}</td>
+            <td>{{ library.book_count }}</td>
+            <td>{{ library.loaned_book_count }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}

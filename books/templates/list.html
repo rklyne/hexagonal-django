@@ -4,7 +4,7 @@ Showing {{ books|length }} books.
 <table>
     <tr><th>Title</th><th>Author</th></tr>
     {% for book in books %}
-        <tr><td>{{book.title}}</td><td>{{book.author.name}}</td></tr>
+    <tr><td>{{book.title}}</td><td>{{book.author.name}}</td><td><a href="{% url 'library-book-add' book_id=book.id %}">Add to library</a></td></tr>
     {% endfor %}
 </table>
 {% endblock %}

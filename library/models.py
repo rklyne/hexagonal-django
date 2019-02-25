@@ -10,6 +10,14 @@ class Library(models.Model):
     city_name = models.CharField(max_length=500)
     reference_library = models.BooleanField(default=False)
 
+    @property
+    def book_count(self):
+        return self.inventory.count()
+
+    @property
+    def loaned_book_count(self):
+        return self.inventory.filter(on_loan=True).count()
+
 
 class LibraryOwnedBook(models.Model):
     library = models.ForeignKey(Library, related_name='inventory')
