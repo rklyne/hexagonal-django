@@ -1,8 +1,11 @@
+from .crud import CrudInterface
+
+
 class BookRepoError(Exception):
     pass
 
 
-class BookRepoInterface(object):
+class BookRepoInterface(CrudInterface):
     def add_book(self, book):
         """
         Adds a book to the repo.

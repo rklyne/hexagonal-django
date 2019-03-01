@@ -2,10 +2,17 @@ from unittest import TestCase
 
 from ..entities.author import Author
 from ..entities.book import Book
+from .crud_contract import contract_test as crud_contract_test
 
 
 def contract_test(repo_generator, test_class=TestCase):
-    class BookRepoInterfaceContract(test_class):
+    class BookRepoInterfaceContract(
+            crud_contract_test(
+                repo_generator,
+                item_generator=lambda id=None: Book(
+                    "asd", Author("asdf"), id=id),
+                test_attribute='isbn',
+                test_class=test_class)):
         def test_create_repo(self):
             repo = repo_generator()
             self.assertTrue(repo)
@@ -46,6 +53,5 @@ def contract_test(repo_generator, test_class=TestCase):
             the_id = repo.add_book(book)
             self.assertTrue(the_id)
             self.assertEqual(the_id, book.id)
-
 
     return BookRepoInterfaceContract

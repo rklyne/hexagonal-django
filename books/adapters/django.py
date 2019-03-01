@@ -9,6 +9,7 @@ from ..models import Book as DjangoBook, Author as DjangoAuthor
 from ..entities.author import Author
 from ..entities.book import Book
 from ..interfaces.book_repo import BookRepoInterface
+from ..interfaces.crud import CrudError
 
 
 def _model_to_entity(book_model):
@@ -59,14 +60,39 @@ class BookRepo(BookRepoInterface):
     def count(self):
         return DjangoBook.objects.count()
 
-    def add_book(self, book):
-        author = get_or_create_author_by_name(book.author)
-        django_book = DjangoBook.objects.create(
-            title=book.title,
+    def create(self, one):
+        author = get_or_create_author_by_name(one.author)
+        django_book, is_new = DjangoBook.objects.get_or_create(
+            title=one.title,
             author=author,
-            isbn=book.isbn,
-            published=book.published,
+            isbn=one.isbn,
+            published=one.published,
         )
+        if not is_new:
+            raise CrudError
         the_id = django_book.pk
-        book.id = the_id
+        one.id = the_id
         return the_id
+
+    add_book = create
+
+    def get(self, uuid):
+        try:
+            django_book = DjangoBook.objects.get(id=uuid)
+        except DjangoBook.DoesNotExist:
+            raise CrudError
+        return _model_to_entity(django_book)
+
+    def update(self, one):
+        try:
+            django_book = DjangoBook.objects.get(id=one.id)
+        except DjangoBook.DoesNotExist:
+            raise CrudError
+        data = one.__dict__
+        django_book.__dict__.update(data)
+        django_book.save()
+
+    def delete(self, one):
+        # Raises error if exists
+        self.get(one.id)
+        DjangoBook.objects.filter(id=one.id).delete()

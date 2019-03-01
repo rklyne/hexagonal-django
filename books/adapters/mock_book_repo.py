@@ -1,17 +1,26 @@
 from itertools import count
 
 from ..interfaces.book_repo import BookRepoInterface
+from ..interfaces.crud import CrudError
 
 
 class BookRepo(BookRepoInterface):
     def __init__(self):
         self.books = []
-        self.next_id = count(1).next
+        self._next_id = count(1).next
 
-    def add_book(self, book):
-        self.books.append(book)
-        book.id = self.next_id()
-        return book.id
+    def create(self, one):
+        try:
+            self.get(one.id)
+        except CrudError:
+            pass
+        else:
+            raise CrudError
+        self.books.append(one)
+        one.id = self._next_id()
+        return one.id
+
+    add_book = create
 
     def count(self):
         return len(self.books)
@@ -29,3 +38,29 @@ class BookRepo(BookRepoInterface):
     def iter_all(self):
         for book in self.books:
             yield book
+
+    def delete(self, one):
+        idx = -1
+        for idx, book in enumerate(self.books):
+            if book.id == one.id:
+                break
+        else:
+            raise CrudError
+        del self.books[idx]
+
+    def get(self, uuid):
+        for book in self.books:
+            if book.id == uuid:
+                return book
+        raise CrudError
+
+    def update(self, one):
+        idx = -1
+        for idx, book in enumerate(self.books):
+            if book.id == one.id:
+                break
+        else:
+            raise CrudError
+        if idx < 0:
+            raise CrudError
+        self.books[idx] = one

@@ -14,6 +14,8 @@ class ForkRepo(BookRepoInterface):
         self.other_repo.add_book(book)
         return the_id
 
+    create = add_book
+
     def iter_by_title(self, title):
         # TODO: Could iterate both and assert equivalence?
         return self.main_repo.iter_by_title(title)
@@ -28,3 +30,14 @@ class ForkRepo(BookRepoInterface):
 
     def iter_all(self):
         return self.main_repo.iter_all()
+
+    def get(self, uuid):
+        return self.main_repo.get(uuid)
+
+    def delete(self, one):
+        self.main_repo.delete(one)
+        self.other_repo.delete(one)
+
+    def update(self, one):
+        self.main_repo.update(one)
+        self.other_repo.update(one)
