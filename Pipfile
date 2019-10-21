@@ -11,7 +11,7 @@ tox-pipenv = "*"
 
 [packages]
 attrs = "*"
-django = "~=1.11.21"
+django = "~=1.11.23"
 six = "*"
 
 [requires]
